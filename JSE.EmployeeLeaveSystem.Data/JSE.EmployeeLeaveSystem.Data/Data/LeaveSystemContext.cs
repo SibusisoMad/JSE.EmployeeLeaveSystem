@@ -29,14 +29,14 @@ namespace JSE.EmployeeLeaveSystem.Data.Data
                 .Property(l => l.Status)
                 .HasConversion<string>();
 
-            
+
             modelBuilder.Entity<LeaveRequest>()
                 .HasOne(lr => lr.Requester)
                 .WithMany(e => e.LeaveRequests)
                 .HasForeignKey(lr => lr.EmployeeId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            
+
             modelBuilder.Entity<LeaveRequest>()
                 .HasOne(lr => lr.ActionedBy)
                 .WithMany()
@@ -99,6 +99,52 @@ namespace JSE.EmployeeLeaveSystem.Data.Data
                 new PublicHoliday { Id = 11, Day = 1, Month = "April", Description = "Family Day" },
                 new PublicHoliday { Id = 12, Day = 18, Month = "April", Description = "Good Friday" }
                 );
+        }
+
+        public async Task RequestLeaveAsync(int employeeId, int leaveTypeId, DateTime startDate, DateTime endDate, string reason)
+        {
+            await Database.ExecuteSqlRawAsync(
+                "EXEC sp_RequestLeave @p0, @p1, @p2, @p3, @p4",
+                employeeId, leaveTypeId, startDate, endDate, reason);
+        }
+
+        // sp_ApproveLeave
+        public async Task ApproveLeaveAsync(int leaveRequestId, int managerId, string comments)
+        {
+            await Database.ExecuteSqlRawAsync(
+                "EXEC sp_ApproveLeave @p0, @p1, @p2",
+                leaveRequestId, managerId, comments);
+        }
+
+        // sp_RejectLeave
+        public async Task RejectLeaveAsync(int leaveRequestId, int managerId, string comments)
+        {
+            await Database.ExecuteSqlRawAsync(
+                "EXEC sp_RejectLeave @p0, @p1, @p2",
+                leaveRequestId, managerId, comments);
+        }
+
+       
+        public async Task RetractLeaveAsync(int leaveRequestId, int employeeId)
+        {
+            await Database.ExecuteSqlRawAsync(
+                "EXEC sp_RetractLeave @p0, @p1",
+                leaveRequestId, employeeId);
+        }
+
+        public async Task<List<LeaveRequest>> GetEmployeeLeaveAsync(int employeeId)
+        {
+            return await LeaveRequests
+                .FromSqlRaw("EXEC sp_GetEmployeeLeave @p0", employeeId)
+                .ToListAsync();
+        }
+
+       
+        public async Task<List<LeaveRequest>> GetManagerSubordinateLeaveAsync(int managerId)
+        {
+            return await LeaveRequests
+                .FromSqlRaw("EXEC sp_GetManagerSubordinateLeave @p0", managerId)
+                .ToListAsync();
         }
     }
 }

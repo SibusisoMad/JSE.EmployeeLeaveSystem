@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,7 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JSE.EmployeeLeaveSystem.Dal\JSE.EmployeeLeaveSystem.Dal.csproj" />
     <ProjectReference Include="..\JSE.EmployeeLeaveSystem.Data\JSE.EmployeeLeaveSystem.Data\JSE.EmployeeLeaveSystem.Data.csproj" />
+    <ProjectReference Include="..\JSE.EmployeeLeaveSystem.Domain\JSE.EmployeeLeaveSystem.Domain.csproj" />
+    <ProjectReference Include="..\JSE.EmployeeLeaveSystem.ServiceExtension\JSE.EmployeeLeaveSystem.ServiceExtension.csproj" />
   </ItemGroup>
 
 </Project>
