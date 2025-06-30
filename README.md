@@ -1,11 +1,18 @@
-JSE.EmployeeLeaveSystem
+
+
+![image](https://github.com/user-attachments/assets/26a658f7-86f3-42e3-ad92-0c4d77d1d834)
+
+
+![image](https://github.com/user-attachments/assets/bdbea083-5ae1-4a29-ad78-3a718a31c033)
+
+
+## JSE.EmployeeLeaveSystem
 An internal leave application system that allows employees to submit leave requests and managers to review, approve, or reject those requests.
 The system consits of backend API and a user-friendly MVC frontend.
 
 
 - **Employees** can apply for leave (annual, sick, etc.), view their request history, and retract or edit pending requests.
 - **Managers** can view requests from their direct subordinates, approve or reject them with comments.
-- Leave calculations **exclude weekends and public holidays**, ensuring accurate leave tracking.
 - Secure authentication using **JWT**, with sessions managing roles and user IDs on the MVC side.
 
 
@@ -92,9 +99,6 @@ Manager login
  View subordinate requests
  Approve/Reject with comments
  Role-based access control
-
-
-![image](https://github.com/user-attachments/assets/26a658f7-86f3-42e3-ad92-0c4d77d1d834)
 
 
 
