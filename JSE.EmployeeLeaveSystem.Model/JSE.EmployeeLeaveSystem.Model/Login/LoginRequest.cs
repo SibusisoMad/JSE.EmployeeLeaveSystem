@@ -3,7 +3,7 @@
     public class LoginRequest
     {
         
-        public int EmployeeId { get; set; }
-        public string Role { get; set; } = "Employee";
+        public string Email { get; set; }
+        public string EmployeeNumber { get; set; } 
     }
 }

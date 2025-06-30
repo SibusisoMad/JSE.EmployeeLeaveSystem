@@ -27,12 +27,15 @@ namespace JSE.EmployeeLeaveSystem.Api.Controllers
         }
 
         [HttpGet("LeaveRequest")]
-        public async Task<ActionResult<List<LeaveRequest>>> GetMyLeaveRequests()
+        public async Task<ActionResult<List<LeaveRequest>>> GetMyLeaveRequests([FromQuery] int? employeeId)
         {
-            var employeeId = User.GetEmployeeId();
-            var leaves = await _leaveRequestService.GetEmployeeLeaveAsync(employeeId);
+            if (employeeId == null)
+                employeeId = User.GetEmployeeId();
+
+            var leaves = await _leaveRequestService.GetEmployeeLeaveAsync(employeeId.Value) ?? new List<LeaveRequest>(); ;
             return Ok(leaves);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> EditLeaveRequest(int id, [FromBody] LeaveRequest request)
@@ -78,7 +81,7 @@ namespace JSE.EmployeeLeaveSystem.Api.Controllers
         public async Task<IActionResult> ApproveLeave(int id, [FromBody] string? comments)
         {
             var managerId = User.GetEmployeeId();
-            await _leaveRequestService.ApproveLeaveAsync(id, managerId, comments ?? "");
+             await _leaveRequestService.ApproveLeaveAsync(id, managerId, comments ?? "");
             return Ok();
         }
 

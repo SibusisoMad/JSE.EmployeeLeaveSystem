@@ -9,31 +9,44 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
     {
         private readonly ApiService _api = new ApiService();
 
-        public ActionResult Login() => View();
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
-            
-            var result = await _api.PostAsync<LoginResponse>("auth/login", model);
+            if (!ModelState.IsValid)
+                return View(model);
 
-            if (result != null && !string.IsNullOrEmpty(result.Token))
+            try
             {
-                Session["JwtToken"] = result.Token;
-                Session["EmployeeId"] = result.EmployeeId;
-                Session["EmployeeRole"] = result.Role;
+                var result = await _api.PostAsync<LoginResponse>("auth/login", model);
 
-                return RedirectToAction("MyRequests", "Employee");
+                if (result != null && !string.IsNullOrEmpty(result.Token))
+                {
+                    // ✅ Store session values
+                    Session["JwtToken"] = result.Token;
+                    Session["EmployeeId"] = result.EmployeeId; // Should be > 0
+                    Session["EmployeeRole"] = result.Role;
+
+                    return RedirectToAction("MyRequests", "Employee");
+                }
+
+                ModelState.AddModelError("", "Invalid login credentials.");
+                return View(model);
             }
-
-            ModelState.AddModelError("", "Invalid login.");
-            return View(model);
+            catch
+            {
+                ModelState.AddModelError("", "Login failed. Please check API or try again later.");
+                return View(model);
+            }
         }
-
 
         public ActionResult Logout()
         {
-            Session["JwtToken"] = null;
+            Session.Clear();
             return RedirectToAction("Login");
         }
     }

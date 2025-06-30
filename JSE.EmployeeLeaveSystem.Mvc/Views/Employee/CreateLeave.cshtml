@@ -10,7 +10,11 @@
 {
     <div class="mb-3">
         @Html.LabelFor(m => m.LeaveTypeId, "Leave Type")
+
         @Html.DropDownListFor(m => m.LeaveTypeId, (SelectList)ViewBag.LeaveTypes, "-- Select Leave Type --", new { @class = "form-control" })
+
+
+        @Html.ValidationMessageFor(m => m.LeaveTypeId, "", new { @class = "text-danger" })
     </div>
     <div class="mb-3">
         @Html.LabelFor(m => m.StartDate)

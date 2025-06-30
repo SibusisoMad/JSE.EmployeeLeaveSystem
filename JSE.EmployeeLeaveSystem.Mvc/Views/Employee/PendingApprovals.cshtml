@@ -1,0 +1,32 @@
+﻿@model List<JSE.EmployeeLeaveSystem.Mvc.Models.LeaveRequestViewModel>
+
+<h2>Pending Leave Approvals</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Leave Type</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Reason</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.EmployeeName</td>
+                <td>@request.LeaveTypeName</td>
+                <td>@request.StartDate.ToShortDateString()</td>
+                <td>@request.EndDate.ToShortDateString()</td>
+                <td>@request.Reason</td>
+                <td>
+                    @Html.ActionLink("Approve", "Approve", new { id = request.Id }, new { @class = "btn btn-success btn-sm" })
+                    @Html.ActionLink("Reject", "Reject", new { id = request.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

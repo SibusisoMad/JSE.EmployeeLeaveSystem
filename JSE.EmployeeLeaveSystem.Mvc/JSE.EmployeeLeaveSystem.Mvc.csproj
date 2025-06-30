@@ -18,7 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44359</IISExpressSSLPort>
+    <IISExpressSSLPort>44398</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Helpers\ApiService.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\LeaveRequestPostDto.cs" />
     <Compile Include="Models\LeaveRequestViewModel.cs" />
     <Compile Include="Models\LeaveTypeViewModel.cs" />
     <Compile Include="Models\LoginResponse.cs" />
@@ -189,6 +190,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Employee\CreateLeave.cshtml" />
     <Content Include="Views\Manager\SubordinateRequests.cshtml" />
+    <Content Include="Views\Employee\PendingApprovals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,12 +6,12 @@
 @using (Html.BeginForm())
 {
     <div class="mb-3">
-        @Html.LabelFor(m => m.EmployeeId, "Employee Number")
-        @Html.TextBoxFor(m => m.EmployeeId, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
     </div>
     <div class="mb-3">
-        @Html.LabelFor(m => m.Role)
-        @Html.TextBoxFor(m => m.Role, new { @class = "form-control" })
+        @Html.LabelFor(m => m.EmployeeNumber, "Employee Number")
+        @Html.TextBoxFor(m => m.EmployeeNumber, new { @class = "form-control" })
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
 }

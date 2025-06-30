@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using static System.Web.Razor.Parser.SyntaxConstants;
 
 namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
 {
@@ -15,7 +16,15 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
         public async Task<ActionResult> MyRequests()
         {
             var token = Session["JwtToken"] as string;
-            var requests = await _api.GetAsync<List<LeaveRequestViewModel>>("LeaveRequests/LeaveRequest", token);
+
+            if (Session["EmployeeId"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var employeeId = (int)Session["EmployeeId"];
+            var requests = await _api.GetAsync<List<LeaveRequestViewModel>>($"LeaveRequests/LeaveRequest", token);
+
             return View(requests);
         }
 
@@ -27,12 +36,12 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CreateLeave(LeaveRequestViewModel model)
+       
+[HttpPost]
+public async Task<ActionResult> CreateLeave(LeaveRequestViewModel model)
         {
             var token = Session["JwtToken"] as string;
 
-           
             if (Session["EmployeeId"] != null)
                 model.EmployeeId = (int)Session["EmployeeId"];
             else
@@ -41,14 +50,8 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            model.Status = "Pending";
-            model.CreatedAt = DateTime.Now;
-            model.UpdatedAt = DateTime.Now;
-            model.DateRequested = DateTime.Now;
-
             if (!ModelState.IsValid)
             {
-               
                 var leaveTypes = await _api.GetAsync<List<LeaveTypeViewModel>>("LeaveTypes", token);
                 ViewBag.LeaveTypes = new SelectList(leaveTypes, "Id", "Name");
                 return View(model);
@@ -56,10 +59,21 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
 
             try
             {
-                await _api.PostAsync<object>("LeaveRequests", model, token);
+                
+                var dto = new LeaveRequestPostDto
+                {
+                    LeaveTypeId = model.LeaveTypeId,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    Reason = model.Reason
+                     
+                };
+
+                await _api.PostAsync<object>("LeaveRequests", dto, token);
+
                 return RedirectToAction("MyRequests");
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 ModelState.AddModelError(string.Empty, "Unable to submit leave request. Please try again.");
                 var leaveTypes = await _api.GetAsync<List<LeaveTypeViewModel>>("LeaveTypes", token);
@@ -67,7 +81,6 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
                 return View(model);
             }
         }
-
         public async Task<ActionResult> EditLeave(int id)
         {
             var token = Session["JwtToken"] as string;

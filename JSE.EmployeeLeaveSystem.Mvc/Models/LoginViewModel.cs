@@ -7,7 +7,7 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Models
 {
     public class LoginViewModel
     {
-        public int EmployeeId { get; set; }
-        public string Role { get; set; }
+        public string Email { get; set; }
+        public string EmployeeNumber { get; set; }
     }
 }

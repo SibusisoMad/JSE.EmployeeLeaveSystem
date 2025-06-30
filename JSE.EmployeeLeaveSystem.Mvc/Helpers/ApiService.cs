@@ -11,7 +11,7 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Helpers
 {
     public class ApiService
     {
-        private readonly string _baseUrl = "https://localhost:7264/api"; // Adjust as needed
+        private readonly string _baseUrl = "https://localhost:7264/api";
 
         public async Task<T> GetAsync<T>(string endpoint, string token = null)
         {
