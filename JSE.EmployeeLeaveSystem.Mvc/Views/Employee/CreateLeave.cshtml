@@ -1,0 +1,35 @@
+﻿@model JSE.EmployeeLeaveSystem.Mvc.Models.LeaveRequestViewModel
+
+@{
+    ViewBag.Title = "Request Leave";
+}
+
+<h2>Request Leave</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="mb-3">
+        @Html.LabelFor(m => m.LeaveTypeId, "Leave Type")
+        @Html.DropDownListFor(m => m.LeaveTypeId, (SelectList)ViewBag.LeaveTypes, "-- Select Leave Type --", new { @class = "form-control" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.StartDate)
+        @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.EndDate)
+        @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Reason)
+        @Html.TextAreaFor(m => m.Reason, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        Please correct the errors and try again.
+    </div>
+}

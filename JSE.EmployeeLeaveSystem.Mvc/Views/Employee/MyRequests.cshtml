@@ -1,0 +1,38 @@
+﻿@model IEnumerable<JSE.EmployeeLeaveSystem.Mvc.Models.LeaveRequestViewModel>
+@{
+    ViewBag.Title = "My Leave Requests";
+}
+<h2>My Leave Requests</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
+            <th>Reason</th>
+            <th>Comments</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var req in Model)
+        {
+            <tr>
+                <td>@req.LeaveTypeName</td>
+                <td>@req.StartDate.ToShortDateString()</td>
+                <td>@req.EndDate.ToShortDateString()</td>
+                <td>@req.Status</td>
+                <td>@req.Reason</td>
+                <td>@req.Comments</td>
+                <td>
+                    @if (req.Status == "Pending")
+                    {
+                        <a href="@Url.Action("EditLeave", new { id = req.Id })" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="@Url.Action("RetractLeave", new { id = req.Id })" class="btn btn-sm btn-danger">Retract</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

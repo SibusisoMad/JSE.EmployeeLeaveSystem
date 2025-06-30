@@ -1,0 +1,17 @@
+﻿@model JSE.EmployeeLeaveSystem.Mvc.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+    <div class="mb-3">
+        @Html.LabelFor(m => m.EmployeeId, "Employee Number")
+        @Html.TextBoxFor(m => m.EmployeeId, new { @class = "form-control" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Role)
+        @Html.TextBoxFor(m => m.Role, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+}

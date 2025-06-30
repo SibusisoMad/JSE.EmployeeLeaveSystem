@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSE.EmployeeLeaveSystem.Dal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSE.EmployeeLeaveSystem.ServiceExtension", "JSE.EmployeeLeaveSystem.ServiceExtension\JSE.EmployeeLeaveSystem.ServiceExtension.csproj", "{62FCEB08-0264-4A21-8BBA-568222BDDCDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSE.EmployeeLeaveSystem.Mvc", "JSE.EmployeeLeaveSystem.Mvc\JSE.EmployeeLeaveSystem.Mvc.csproj", "{66B2CEA5-C011-4CEF-9F76-B12F06168D95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSE.EmployeeLeaveSystem.Mvc.Tests", "JSE.EmployeeLeaveSystem.Mvc.Tests\JSE.EmployeeLeaveSystem.Mvc.Tests.csproj", "{E07B1192-B4BD-4AE4-BEDE-44B0789D7DBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,14 @@ Global
 		{62FCEB08-0264-4A21-8BBA-568222BDDCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62FCEB08-0264-4A21-8BBA-568222BDDCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62FCEB08-0264-4A21-8BBA-568222BDDCDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66B2CEA5-C011-4CEF-9F76-B12F06168D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B2CEA5-C011-4CEF-9F76-B12F06168D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B2CEA5-C011-4CEF-9F76-B12F06168D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B2CEA5-C011-4CEF-9F76-B12F06168D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E07B1192-B4BD-4AE4-BEDE-44B0789D7DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E07B1192-B4BD-4AE4-BEDE-44B0789D7DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E07B1192-B4BD-4AE4-BEDE-44B0789D7DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E07B1192-B4BD-4AE4-BEDE-44B0789D7DBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
