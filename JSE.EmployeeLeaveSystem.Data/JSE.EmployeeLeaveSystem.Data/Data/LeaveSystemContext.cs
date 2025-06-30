@@ -108,7 +108,6 @@ namespace JSE.EmployeeLeaveSystem.Data.Data
                 employeeId, leaveTypeId, startDate, endDate, reason);
         }
 
-        // sp_ApproveLeave
         public async Task ApproveLeaveAsync(int leaveRequestId, int managerId, string comments)
         {
             await Database.ExecuteSqlRawAsync(
@@ -116,7 +115,7 @@ namespace JSE.EmployeeLeaveSystem.Data.Data
                 leaveRequestId, managerId, comments);
         }
 
-        // sp_RejectLeave
+     
         public async Task RejectLeaveAsync(int leaveRequestId, int managerId, string comments)
         {
             await Database.ExecuteSqlRawAsync(

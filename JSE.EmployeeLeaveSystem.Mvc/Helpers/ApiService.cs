@@ -36,8 +36,15 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Helpers
 
                 var content = new StringContent(JsonConvert.SerializeObject(data), System.Text.Encoding.UTF8, "application/json");
                 var response = await client.PostAsync($"{_baseUrl}/{endpoint}", content);
-                response.EnsureSuccessStatusCode();
+
                 var json = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    
+                    throw new HttpRequestException($"API call failed ({response.StatusCode}): {json}");
+                }
+
                 return JsonConvert.DeserializeObject<T>(json);
             }
         }

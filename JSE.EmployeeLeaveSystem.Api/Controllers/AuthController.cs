@@ -23,6 +23,14 @@ namespace JSE.EmployeeLeaveSystem.Api.Controllers
         public IActionResult Login([FromBody] LoginRequest request)
         {
 
+            if (request == null)
+            {
+                return BadRequest("Request is null.");
+            }
+            if (string.IsNullOrEmpty(request.Role))
+            {
+                request.Role = "Employee"; 
+            }
             if (request.EmployeeId == 1234 && request.Role == "Employee")
             {
                 var token = GenerateJwtToken(request.EmployeeId, request.Role);
