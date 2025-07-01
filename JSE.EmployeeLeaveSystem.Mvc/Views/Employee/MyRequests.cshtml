@@ -27,7 +27,7 @@
                 <td>@(req.Team ?? "-")</td>
                 <td>@req.StartDate.ToString("yyyy-MM-dd")</td>
                 <td>@req.EndDate.ToString("yyyy-MM-dd")</td>
-                <td>@req.Status</td>
+                <td>@req.Status.ToString()</td>
                 <td>@req.Reason</td>
                 <td>@(req.Comments ?? "-")</td>
                 <td>

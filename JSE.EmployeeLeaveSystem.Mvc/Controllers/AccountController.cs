@@ -26,14 +26,16 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
 
                 if (result != null && !string.IsNullOrEmpty(result.Token))
                 {
-                    
                     Session["JwtToken"] = result.Token;
-                    Session["EmployeeId"] = result.EmployeeId; 
+                    Session["EmployeeId"] = result.EmployeeId;
                     Session["EmployeeRole"] = result.Role;
 
-                    return RedirectToAction("MyRequests", "Employee");
-                }
+                    if (result.Role == "Employee")
+                        return RedirectToAction("MyRequests", "Employee");
 
+                    if (result.Role == "Manager")
+                        return RedirectToAction("SubordinateRequests", "Manager");
+                }
                 ModelState.AddModelError("", "Invalid login credentials.");
                 return View(model);
             }

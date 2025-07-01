@@ -1,6 +1,7 @@
 ﻿using JSE.EmployeeLeaveSystem.Dal.Interface;
 using JSE.EmployeeLeaveSystem.Domain.Interface;
 using JSE.EmployeeLeaveSystem.Model;
+using JSE.EmployeeLeaveSystem.Model.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace JSE.EmployeeLeaveSystem.Domain.Service
                 StartDate = lr.StartDate,
                 EndDate = lr.EndDate,
                 Reason = lr.Reason,
-                Status = lr.Status,
+                Status = (LeaveStatus)(byte)LeaveStatus.Pending,
                 CreatedAt = lr.CreatedAt,
                 UpdatedAt = lr.UpdatedAt,
                 ActionedById = lr.ActionedById,

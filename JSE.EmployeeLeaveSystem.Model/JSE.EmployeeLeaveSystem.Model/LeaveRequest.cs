@@ -35,7 +35,9 @@ namespace JSE.EmployeeLeaveSystem.Model
 
         public string? ActionedByName { get; set; }
 
+        [NotMapped]
         public string? Team { get; set; }
+
 
 
         [NotMapped]
