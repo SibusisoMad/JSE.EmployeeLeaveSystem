@@ -26,9 +26,9 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
 
                 if (result != null && !string.IsNullOrEmpty(result.Token))
                 {
-                    // ✅ Store session values
+                    
                     Session["JwtToken"] = result.Token;
-                    Session["EmployeeId"] = result.EmployeeId; // Should be > 0
+                    Session["EmployeeId"] = result.EmployeeId; 
                     Session["EmployeeRole"] = result.Role;
 
                     return RedirectToAction("MyRequests", "Employee");

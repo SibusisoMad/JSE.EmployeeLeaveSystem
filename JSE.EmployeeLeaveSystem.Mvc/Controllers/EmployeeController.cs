@@ -22,8 +22,7 @@ namespace JSE.EmployeeLeaveSystem.Mvc.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var employeeId = (int)Session["EmployeeId"];
-            var requests = await _api.GetAsync<List<LeaveRequestViewModel>>($"LeaveRequests/LeaveRequest", token);
+            var requests = await _api.GetAsync<List<LeaveRequestViewModel>>("LeaveRequests/LeaveRequest", token);
 
             return View(requests);
         }

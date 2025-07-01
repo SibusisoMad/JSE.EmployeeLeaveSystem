@@ -1,5 +1,6 @@
 ﻿using JSE.EmployeeLeaveSystem.Model;
 using JSE.EmployeeLeaveSystem.Model.Enum;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace JSE.EmployeeLeaveSystem.Data.Data
@@ -133,12 +134,14 @@ namespace JSE.EmployeeLeaveSystem.Data.Data
 
         public async Task<List<LeaveRequest>> GetEmployeeLeaveAsync(int employeeId)
         {
+            var employeeIdParam = new SqlParameter("@EmployeeId", employeeId);
+
             return await LeaveRequests
-                .FromSqlRaw("EXEC sp_GetEmployeeLeave @p0", employeeId)
+                .FromSqlRaw("EXEC sp_GetEmployeeLeave @EmployeeId", employeeIdParam)
                 .ToListAsync();
         }
 
-       
+
         public async Task<List<LeaveRequest>> GetManagerSubordinateLeaveAsync(int managerId)
         {
             return await LeaveRequests

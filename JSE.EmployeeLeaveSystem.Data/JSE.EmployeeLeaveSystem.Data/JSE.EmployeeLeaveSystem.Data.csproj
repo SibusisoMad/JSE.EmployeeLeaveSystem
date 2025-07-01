@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\JSE.EmployeeLeaveSystem.Model\JSE.EmployeeLeaveSystem.Model\JSE.EmployeeLeaveSystem.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\StoredProcedures\" />
+  </ItemGroup>
+
 </Project>

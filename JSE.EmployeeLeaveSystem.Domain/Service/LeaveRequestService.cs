@@ -30,8 +30,34 @@ namespace JSE.EmployeeLeaveSystem.Domain.Service
         public Task RetractLeaveAsync(int leaveRequestId, int employeeId)
             => _repository.RetractLeaveAsync(leaveRequestId, employeeId);
 
-        public Task<List<LeaveRequest>> GetEmployeeLeaveAsync(int employeeId)
-            => _repository.GetEmployeeLeaveAsync(employeeId);
+        public async Task<List<LeaveRequest>> GetEmployeeLeaveAsync(int employeeId)
+        {
+            var entities = await _repository.GetEmployeeLeaveAsync(employeeId);
+
+            var result = entities.Select(lr => new LeaveRequest
+            {
+                Id = lr.Id,
+                EmployeeId = lr.EmployeeId,
+                EmployeeName = lr.EmployeeName,
+                Team = lr.Team,
+                LeaveTypeId = lr.LeaveTypeId,
+                LeaveTypeName = lr.LeaveTypeName,
+                StartDate = lr.StartDate,
+                EndDate = lr.EndDate,
+                Reason = lr.Reason,
+                Status = lr.Status,
+                CreatedAt = lr.CreatedAt,
+                UpdatedAt = lr.UpdatedAt,
+                ActionedById = lr.ActionedById,
+                ActionedByName = lr.ActionedByName,
+                DateActioned = lr.DateActioned,
+                DateRequested = lr.DateRequested ?? DateTime.Now,
+                Comments = lr.Comments
+            }).ToList();
+
+            return result;
+        }
+
 
         public Task<List<LeaveRequest>> GetManagerSubordinateLeaveAsync(int managerId)
             => _repository.GetManagerSubordinateLeaveAsync(managerId);

@@ -29,11 +29,19 @@ namespace JSE.EmployeeLeaveSystem.Api.Controllers
         [HttpGet("LeaveRequest")]
         public async Task<ActionResult<List<LeaveRequest>>> GetMyLeaveRequests([FromQuery] int? employeeId)
         {
-            if (employeeId == null)
-                employeeId = User.GetEmployeeId();
+            try
+            {
+                if (employeeId == null)
+                    employeeId = User.GetEmployeeId();
 
-            var leaves = await _leaveRequestService.GetEmployeeLeaveAsync(employeeId.Value) ?? new List<LeaveRequest>(); ;
-            return Ok(leaves);
+                var leaves = await _leaveRequestService.GetEmployeeLeaveAsync(employeeId.Value) ?? new List<LeaveRequest>();
+                return Ok(leaves);
+            }
+            catch (Exception ex)
+            {
+              
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
         }
 
 
